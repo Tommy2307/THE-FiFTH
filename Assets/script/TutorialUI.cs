@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
+using System.Collections; // Fixed: Removed the broken '.Empty' line!
 
 public class TutorialUI : MonoBehaviour
 {
@@ -8,8 +8,8 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tutorialText;
 
     [Header("Timer Settings")]
-    [SerializeField] private float displayDuration = 5f; // Shows on screen for 5 seconds
-    [SerializeField] private float fadeDuration = 1.5f;   // Smoothly fades over 1.5 seconds
+    [SerializeField] private float displayDuration = 5f; 
+    [SerializeField] private float fadeDuration = 1.5f;   
 
     void Start()
     {
@@ -20,25 +20,20 @@ public class TutorialUI : MonoBehaviour
 
         if (tutorialText != null)
         {
-            // Set the instruction message
             tutorialText.text = "Press F to turn on the Flashlight";
             
-            // Set text color to white and fully visible at start
             Color txtColor = tutorialText.color;
             txtColor.a = 1f;
             tutorialText.color = txtColor;
 
-            // Start the delay and fade process
             StartCoroutine(DisplayAndFadeTutorial());
         }
     }
 
     private IEnumerator DisplayAndFadeTutorial()
     {
-        // 1. Leave the message on screen for 5 seconds
         yield return new WaitForSeconds(displayDuration);
 
-        // 2. Smoothly fade transparency out
         float currentTime = 0f;
         Color startColor = tutorialText.color;
 
@@ -50,7 +45,6 @@ public class TutorialUI : MonoBehaviour
             yield return null;
         }
 
-        // 3. Deactivate the object completely when done
         tutorialText.gameObject.SetActive(false);
     }
 }
