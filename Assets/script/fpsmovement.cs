@@ -22,6 +22,14 @@ public class FPSMovement : MonoBehaviour
     [SerializeField] private float walkStepInterval = 0.5f;
     [SerializeField] private float runStepInterval = 0.3f;
 
+    [Header("Head Bobbing")]
+    [SerializeField] private bool enableHeadBob = true;
+    [SerializeField] private float walkBobSpeed = 8f;
+    [SerializeField] private float walkBobAmount = 0.05f;
+    [SerializeField] private float runBobSpeed = 12f;
+    [SerializeField] private float runBobAmount = 0.08f;
+    [SerializeField] private float bobSmoothing = 8f;
+
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
@@ -34,6 +42,10 @@ public class FPSMovement : MonoBehaviour
     private AudioSource footstepSource;
     private float stepTimer = 0f;
 
+    // Head bob variables
+    private Vector3 cameraStartLocalPos;
+    private float bobTimer = 0f;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -44,6 +56,9 @@ public class FPSMovement : MonoBehaviour
         if (playerCamera == null)
             playerCamera = GetComponentInChildren<Camera>().transform;
 
+        // Store the camera's original local position for head bob reference
+        cameraStartLocalPos = playerCamera.localPosition;
+
         footstepSource = GetComponent<AudioSource>();
         if (footstepSource == null)
             footstepSource = gameObject.AddComponent<AudioSource>();
@@ -53,11 +68,22 @@ public class FPSMovement : MonoBehaviour
         footstepSource.volume = 0.5f;
     }
 
+    public bool isMovementEnabled = true;
+
     void Update()
     {
+        if (!isMovementEnabled)
+        {
+            moveInput = Vector2.zero;
+            lookInput = Vector2.zero;
+            HandleFootsteps(); // Run footsteps check to ensure audio stops
+            return;
+        }
+
         HandleMouseLook();
         HandleMovement();
         HandleFootsteps();
+        HandleHeadBob();
     }
 
     // 1. INPUT CALLBACKS
@@ -146,5 +172,40 @@ public class FPSMovement : MonoBehaviour
         int randomIndex = Random.Range(0, clips.Length);
         footstepSource.clip = clips[randomIndex];
         footstepSource.Play();
+    }
+
+    // 5. HEAD BOBBING
+    private void HandleHeadBob()
+    {
+        if (!enableHeadBob || playerCamera == null) return;
+
+        bool isMoving = moveInput.magnitude > 0.1f && isGrounded;
+
+        Vector3 targetPos;
+
+        if (isMoving)
+        {
+            float bobSpeed = isSprinting ? runBobSpeed : walkBobSpeed;
+            float bobAmount = isSprinting ? runBobAmount : walkBobAmount;
+
+            bobTimer += Time.deltaTime * bobSpeed;
+
+            // Vertical bob (up/down) using sine wave
+            float bobOffsetY = Mathf.Sin(bobTimer) * bobAmount;
+
+            // Slight horizontal sway (side to side) using cosine for natural offset
+            float bobOffsetX = Mathf.Cos(bobTimer * 0.5f) * bobAmount * 0.5f;
+
+            targetPos = cameraStartLocalPos + new Vector3(bobOffsetX, bobOffsetY, 0f);
+        }
+        else
+        {
+            // Reset timer slowly and return to neutral position when standing still
+            bobTimer = 0f;
+            targetPos = cameraStartLocalPos;
+        }
+
+        // Smoothly interpolate to avoid jitter
+        playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetPos, Time.deltaTime * bobSmoothing);
     }
 }

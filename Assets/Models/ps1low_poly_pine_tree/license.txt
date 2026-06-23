@@ -1,0 +1,11 @@
+Model Information:
+* title:	PS1/Low Poly Pine Tree
+* source:	https://sketchfab.com/3d-models/ps1low-poly-pine-tree-6d8c9b82e66849fd9370c0b2dd4f2274
+* author:	Jellypack (https://sketchfab.com/jellypack)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PS1/Low Poly Pine Tree" (https://sketchfab.com/3d-models/ps1low-poly-pine-tree-6d8c9b82e66849fd9370c0b2dd4f2274) by Jellypack (https://sketchfab.com/jellypack) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

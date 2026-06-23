@@ -1,0 +1,11 @@
+Model Information:
+* title:	Food Cans
+* source:	https://sketchfab.com/3d-models/food-cans-3d669bd31c944260b2c2dae52c200c39
+* author:	LiliumLetifer (https://sketchfab.com/LiliumLetifer)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Food Cans" (https://sketchfab.com/3d-models/food-cans-3d669bd31c944260b2c2dae52c200c39) by LiliumLetifer (https://sketchfab.com/LiliumLetifer) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
