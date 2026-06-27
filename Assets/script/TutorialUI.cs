@@ -20,7 +20,7 @@ public class TutorialUI : MonoBehaviour
 
         if (tutorialText != null)
         {
-            tutorialText.text = "Press F to turn on the Flashlight";
+            tutorialText.text = "Press F to turn on the Flashlight,";
             
             Color txtColor = tutorialText.color;
             txtColor.a = 1f;

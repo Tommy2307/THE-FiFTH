@@ -16,9 +16,15 @@ public class FPSMovement : MonoBehaviour
     [SerializeField] private float upperLookLimit = -80f;
     [SerializeField] private float lowerLookLimit = 80f;
 
-    [Header("Footstep Sounds")]
-    [SerializeField] private AudioClip[] walkSounds;
-    [SerializeField] private AudioClip[] runSounds;
+    [Header("Outside Footstep Sounds (Grass/Leaves)")]
+    [SerializeField] private AudioClip[] outsideWalkSounds;
+    [SerializeField] private AudioClip[] outsideRunSounds;
+
+    [Header("Inside Footstep Sounds (Concrete/Wood)")]
+    [SerializeField] [UnityEngine.Serialization.FormerlySerializedAs("walkSounds")] private AudioClip[] insideWalkSounds;
+    [SerializeField] [UnityEngine.Serialization.FormerlySerializedAs("runSounds")] private AudioClip[] insideRunSounds;
+
+    [Header("Timing Settings")]
     [SerializeField] private float walkStepInterval = 0.5f;
     [SerializeField] private float runStepInterval = 0.3f;
 
@@ -163,7 +169,18 @@ public class FPSMovement : MonoBehaviour
 
     private void PlayFootstep()
     {
-        AudioClip[] clips = isSprinting ? runSounds : walkSounds;
+        bool isInside = PlayerPrefs.GetInt("HouseEntered", 0) == 1;
+        AudioClip[] clips = null;
+
+        if (isInside)
+        {
+            clips = isSprinting ? insideRunSounds : insideWalkSounds;
+        }
+        else
+        {
+            clips = isSprinting ? outsideRunSounds : outsideWalkSounds;
+        }
+
         if (clips == null || clips.Length == 0) return;
 
         if (footstepSource.isPlaying)

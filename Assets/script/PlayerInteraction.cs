@@ -120,12 +120,9 @@ public class PlayerInteraction : MonoBehaviour
         bool inputPressedThisFrame = Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame;
         
         // Inspect dialogue input bypass
-        if (ObjectiveManager.Instance != null && ObjectiveManager.Instance.IsInspecting)
+        if ((ObjectiveManager.Instance != null && ObjectiveManager.Instance.IsInspecting) ||
+            (EvidenceManager.Instance != null && EvidenceManager.Instance.IsInspecting))
         {
-            if (inputPressedThisFrame)
-            {
-                ObjectiveManager.Instance.AdvanceInspectDialogue();
-            }
             if (uiText != null) uiText.text = "";
             return;
         }
@@ -162,6 +159,21 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactRange))
         {
+            // EVIDENCE INTERACTION SYSTEM DETECTION
+            EvidenceObject evidenceScript = hit.collider.GetComponent<EvidenceObject>()
+                ?? hit.collider.GetComponentInParent<EvidenceObject>();
+
+            if (evidenceScript != null && (!evidenceScript.InspectOnlyOnce || !evidenceScript.HasBeenInspected))
+            {
+                if (uiText != null) uiText.text = evidenceScript.GetPrompt();
+
+                if (inputPressedThisFrame && !inputConsumedThisFrame)
+                {
+                    evidenceScript.Inspect();
+                }
+                return;
+            }
+
             // 1. KEY
             if (hit.collider.CompareTag("Key"))
             {
