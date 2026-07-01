@@ -15,6 +15,7 @@ public class Letter : MonoBehaviour
     [Header("Sound Effects")]
     [SerializeField] private AudioClip pickUpSound;
     [SerializeField] private AudioClip closeSound;
+    [SerializeField] private AudioClip dialogSound;
 
     private AudioSource audioSource;
     private bool isReading = false;
@@ -51,6 +52,12 @@ public class Letter : MonoBehaviour
         if (pickUpSound != null)
             audioSource.PlayOneShot(pickUpSound);
 
+        if (dialogSound != null)
+        {
+            audioSource.clip = dialogSound;
+            audioSource.Play();
+        }
+
         if (letterUI != null) letterUI.SetActive(true);
         if (letterMesh != null) letterMesh.enabled = false;
         if (player != null) player.enabled = false;
@@ -69,6 +76,9 @@ public class Letter : MonoBehaviour
         Debug.Log("[LETTER] CloseLetter() called! Frame: " + Time.frameCount);
 
         isReading = false;
+
+        if (audioSource.isPlaying)
+            audioSource.Stop();
 
         if (closeSound != null)
             audioSource.PlayOneShot(closeSound);

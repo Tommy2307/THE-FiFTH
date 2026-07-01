@@ -1,0 +1,81 @@
+# Level Game Design Document (GDD) - THE FIFTH
+
+## LEVEL 1 — OUTSIDE INVESTIGATION
+**Story Purpose:** Introduce the case. Prove Rani reached the house. Create suspense.
+**Player Objective:** Investigate outside. Collect evidence. Enter the house.
+**Environment:** 
+- Forest
+- Abandoned House
+- Broken Fence
+- Trees
+- Wind
+- Night
+**Gameplay:** Flashlight mechanics, Evidence Collection, Notebook Updates.
+**Evidence:**
+- [x] Camera Bag
+- [x] Reporter ID
+- [x] Cigarette
+- [x] Tree Note
+**Puzzle:** None (Player learns investigation mechanics).
+**Horror Event:** None. Only atmosphere.
+**Exit:** Enter house.
+
+---
+
+## LEVEL 2 — HOUSE
+**Story Purpose:** Discover what happened inside. Build tension.
+**Player Objective:** Search rooms. Find clues. Reach radio room.
+**Environment / Flow:** Hall -> Kitchen -> Bedroom -> Radio Room
+**Evidence:**
+- Camera
+- Diary
+- Blood Marks
+- Children Drawings
+**Puzzle:** Radio clue (1968...)
+**Horror Event:** Radio starts. Children voices. Rani's voice. Killer enters.
+**Exit:** Escape.
+
+---
+
+## LEVEL 3 — CHASE
+**Story Purpose:** Introduce killer. Increase tension.
+**Player Objective:** Hide. Escape. Find missing number.
+**Gameplay:**
+- Hide
+- Run
+- Listen
+- Observe
+**Evidence:** Paper -> 5
+**Puzzle:** 19685
+**Exit:** Open Basement.
+
+---
+
+## LEVEL 4 — BASEMENT
+**Story Purpose:** Reveal ritual. Reveal fifth victim.
+**Player Objective:** Investigate. Understand ritual. Find exit.
+**Environment:**
+- Ritual Room
+- Storage
+- Tunnel
+**Evidence:**
+- Bodies
+- Symbols
+- Book
+- Wall
+**Puzzle:** None (Story-driven).
+**Horror Event:** No chase. Psychological horror.
+**Exit:** Tunnel.
+
+---
+
+## LEVEL 5 — FOREST
+**Story Purpose:** Final investigation. Reveal twist.
+**Player Objective:** Escape. Follow clues. Reach temple.
+**Gameplay:** Exploration. Investigation.
+**Evidence:**
+- Blood
+- Footprints
+- Birth Records
+**Final Reveal:** Virat's DOB.
+**Ending:** THE FIFTH - CASE UNSOLVED
